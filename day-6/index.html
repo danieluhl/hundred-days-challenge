@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuejs Playground</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{message}}</p>
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo }}
+        </li>
+      </ol>
+      <input v-model="message" type="text" v-color-update />
+    </div>
+
+    <script>
+      const list = new Set([1, 2, 3, 4]);
+      Vue.directive('color-update', {
+        // When the bound element is inserted into the DOM...
+        update: function (el) {
+          console.log('here');
+          // Focus the element
+          el.style.backgroundColor = `#${Math.floor(
+            Math.random() * 16777215
+          ).toString(16)}`;
+        },
+      });
+      const app = new Vue({
+        el: '#app',
+        data: {
+          todos: list,
+          message: 'hello',
+        },
+      });
+    </script>
+  </body>
+</html>
