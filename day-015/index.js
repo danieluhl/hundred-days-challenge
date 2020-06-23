@@ -18,10 +18,11 @@ const clamp = (val, min = -Infinity, max = Infinity) => {
 };
 
 const rgbClamp = d => clamp(d, 0, 255);
+const decimalToHex = d => d.toString(16).toUpperCase().padStart(2, '0');
 
-const decimalToHex = d => (d < 16 ? d.toString(16).repeat(2) : d.toString(16));
+const clampedDecimalToHex = d => decimalToHex(rgbClamp(d));
 
-const rgb = (...rgbArr) => rgbArr.map(rgbClamp).map(decimalToHex).join('');
+const rgb = (...rgbArr) => rgbArr.map(clampedDecimalToHex).join('');
 
 const result1 = rgb(255, 255, 255); // returns FFFFFF
 const result2 = rgb(255, 255, 300); // returns FFFFFF
